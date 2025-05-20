@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.LoginController">
+    <children>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="396.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Text fill="#4fe058" layoutX="69.0" layoutY="43.0" stroke="#a41a1a" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.1" text="System zarządzania gospodarstwem" textAlignment="CENTER" wrappingWidth="501.13671875">
+                    <font>
+                        <Font name="System Bold" size="27.0" />
+                    </font>
+                </Text>
+                <Text layoutX="266.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="107.443359375">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <TextField fx:id="loginField" layoutX="246.0" layoutY="118.0" promptText="Login" />
+                <Text layoutX="249.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło" textAlignment="CENTER" wrappingWidth="142.052734375">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <PasswordField fx:id="passwordField" layoutX="246.0" layoutY="188.0" promptText="Hasło" />
+                <Button layoutX="196.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#zaloguj_sie" prefHeight="53.0" prefWidth="107.0" text="Zaloguj" />
+                <Button layoutX="320.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#zarejestruj_sie" prefHeight="53.0" prefWidth="107.0" text="Zarejestruj się" />
+                <Text fx:id="errorText" fill="RED" layoutX="246.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="142.052734375" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
