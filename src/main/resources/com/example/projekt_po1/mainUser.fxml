@@ -21,4 +21,5 @@
         <Button fx:id="logoutButton" maxWidth="Infinity" text="Wyloguj się" />
     </VBox>
 
+
 </AnchorPane>
