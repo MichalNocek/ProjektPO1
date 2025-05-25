@@ -4,25 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b9a7985-7281-4f15-89b8-bc0edc2954f8" name="Changes" comment="Pierwszy commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/BaseEnity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Field.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddFieldMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/jdbc/CrudOperation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addFieldMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/mainUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="9b9a7985-7281-4f15-89b8-bc0edc2954f8" name="Changes" comment="40% zrobione">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/SessionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jdbc/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jdbc/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/BaseEnity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/BaseEnity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddFieldMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddFieldMenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/jdbc/CrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jdbc/CrudOperation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/mainUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/mainUser.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +76,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -132,7 +128,10 @@
       <workItem from="1747661950297" duration="37000" />
       <workItem from="1747662185246" duration="65000" />
       <workItem from="1747663298671" duration="62000" />
-      <workItem from="1747676689547" duration="14934000" />
+      <workItem from="1747676689547" duration="16412000" />
+      <workItem from="1747851527899" duration="79000" />
+      <workItem from="1748002284669" duration="11479000" />
+      <workItem from="1748174270606" duration="3027000" />
     </task>
     <task id="LOCAL-00001" summary="Pierwszy commit">
       <option name="closed" value="true" />
@@ -150,7 +149,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747082962120</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="40% zrobione">
+      <option name="closed" value="true" />
+      <created>1747702754303</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747702754303</updated>
+    </task>
+    <task id="LOCAL-00004" summary="40% zrobione">
+      <option name="closed" value="true" />
+      <created>1747702781749</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747702781749</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +184,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Pierwszy commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pierwszy commit" />
+    <MESSAGE value="40% zrobione" />
+    <option name="LAST_COMMIT_MESSAGE" value="40% zrobione" />
   </component>
 </project>

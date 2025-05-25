@@ -2,7 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -10,16 +11,22 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.MainController">
 
     <VBox layoutX="20" layoutY="20" prefWidth="560" spacing="10">
-        <Label prefHeight="54.0" prefWidth="560.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="                                            Lista pól uprawnych" textAlignment="JUSTIFY" textFill="#3cff70" />
+        <Label prefHeight="54.0" prefWidth="560.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Lista pól uprawnych" textAlignment="CENTER" textFill="#3cff70" />
 
-        <ListView fx:id="fieldList" prefHeight="200.0" />
+        <TableView fx:id="fieldTable" prefHeight="200.0">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Nazwa" />
+                <TableColumn fx:id="areaColumn" prefWidth="150.0" text="Powierzchnia (ha)" />
+                <TableColumn fx:id="localisationColumn" prefWidth="150.0" text="Lokalizacja" />
+            </columns>
+        </TableView>
 
         <HBox spacing="10">
-            <Button fx:id="addButton" prefHeight="25.0" onMouseClicked="#dodajpole" prefWidth="560.0" text="Dodaj nowe pole" />
+            <Button fx:id="addButton" onMouseClicked="#dodajpole" prefHeight="25.0" prefWidth="275.0" text="Dodaj nowe pole" HBox.hgrow="ALWAYS" />
+            <Button fx:id="deleteButton" onMouseClicked="#usunPole" prefHeight="25.0" prefWidth="275.0" text="Usuń zaznaczone pole" HBox.hgrow="ALWAYS" />
         </HBox>
 
-        <Button fx:id="logoutButton" maxWidth="Infinity" text="Wyloguj się" />
+        <Button fx:id="logoutButton" maxWidth="Infinity" onMouseClicked="#wyloguj_sie" text="Wyloguj się" />
     </VBox>
-
 
 </AnchorPane>
