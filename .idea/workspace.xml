@@ -5,18 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b9a7985-7281-4f15-89b8-bc0edc2954f8" name="Changes" comment="40% zrobione">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/SessionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Uprawa.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Zabieg.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddUprawaMenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddZabiegMenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/UprawaController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/ZabiegiMenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addUprawaMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addZabiegMenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/uprawa.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/zabiegiMenu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/BaseEnity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/BaseEnity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddFieldMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddFieldMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/jdbc/CrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jdbc/CrudOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/login.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/mainUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/mainUser.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +37,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -62,24 +66,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_directory_selection": "C:/Users/Michał/IdeaProjects/ProjektPO1/src/main/resources/com/example/projekt_po1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/Michał/IdeaProjects/ProjektPO1/src/main/resources/com/example/projekt_po1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Michał\IdeaProjects\ProjektPO1\src\main\resources\com\example\projekt_po1" />
@@ -132,6 +136,7 @@
       <workItem from="1747851527899" duration="79000" />
       <workItem from="1748002284669" duration="11479000" />
       <workItem from="1748174270606" duration="3027000" />
+      <workItem from="1749339608432" duration="9541000" />
     </task>
     <task id="LOCAL-00001" summary="Pierwszy commit">
       <option name="closed" value="true" />

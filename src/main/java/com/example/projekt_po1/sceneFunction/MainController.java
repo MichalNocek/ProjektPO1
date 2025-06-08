@@ -1,9 +1,9 @@
 package com.example.projekt_po1.sceneFunction;
 
 import com.example.projekt_po1.HelloApplication;
-
 import com.example.projekt_po1.objects.Field;
 import com.example.projekt_po1.objects.SessionManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +27,7 @@ public class MainController {
     public Button deleteButton;
 
     @FXML
-    public Button logoutButton; // <--- Upewnij się, że masz to fx:id w FXML
+    public Button logoutButton;
 
     @FXML
     private TableView<Field> fieldTable;
@@ -37,6 +37,8 @@ public class MainController {
     private TableColumn<Field, Double> areaColumn;
     @FXML
     private TableColumn<Field, String> localisationColumn;
+    @FXML
+    private Button showUprawyButton;
 
     @FXML
     public void initialize() {
@@ -44,72 +46,64 @@ public class MainController {
         areaColumn.setCellValueFactory(new PropertyValueFactory<>("area"));
         localisationColumn.setCellValueFactory(new PropertyValueFactory<>("localisation"));
 
-        // Formatowanie kolumny z powierzchnią
-        areaColumn.setCellFactory(column -> new TableCell<Field, Double>() {
-            @Override
-            protected void updateItem(Double item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(String.format("%.2f", item));
-                }
-            }
+        fieldTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            boolean isSelected = newSelection != null;
+            deleteButton.setDisable(!isSelected);
+            showUprawyButton.setDisable(!isSelected);
         });
+        deleteButton.setDisable(true);
+        showUprawyButton.setDisable(true);
 
-        loadTableData();
+        loadFields();
     }
 
-    private void loadTableData() {
+    private void loadFields() {
         CrudOperation crudOperation = new CrudOperation();
         try {
-            fieldTable.getItems().clear(); // <--- WAŻNE: Wyczyść tabelę przed ponownym załadowaniem!
-            List<Field> pola = crudOperation.getFields();
-            fieldTable.getItems().addAll(pola);
+            List<Field> fields = crudOperation.getFields();
+            fieldTable.getItems().setAll(fields);
         } catch (SQLException e) {
-            showError("Błąd podczas ładowania danych", e.getMessage());
+            showError("Błąd bazy danych", "Nie udało się załadować pól: " + e.getMessage());
         } catch (IllegalStateException e) {
-            // Obsługa przypadku, gdy użytkownik nie jest zalogowany (choć nie powinien się tu znaleźć)
-            showError("Błąd sesji", e.getMessage());
+            showError("Błąd autoryzacji", e.getMessage());
+
         }
     }
 
     @FXML
-    public void dodajpole(MouseEvent mouseEvent) {
+    private void handleAddField(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("addFieldMenu.fxml"));
+            // Użycie pełnej ścieżki do zasobu FXML z HelloApplication.class
+            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/addFieldMenu.fxml"));
             Parent root = loader.load();
-            Scene nowaScena = new Scene(root);
-            Stage noweOkno = new Stage();
-            noweOkno.setScene(nowaScena);
-            noweOkno.setTitle("Dodaj nowe pole");
+            Scene addFieldScene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.setScene(addFieldScene);
+            newStage.setTitle("Dodaj Nowe Pole");
+            newStage.showAndWait(); // Czekaj, aż okno dodawania pola zostanie zamknięte
 
-            noweOkno.setOnHidden(event -> {
-                loadTableData(); // Przeładuj dane w tabeli po zamknięciu okna
-            });
-
-            noweOkno.show();
+            loadFields();
         } catch (IOException e) {
-            showError("Błąd", "Nie udało się otworzyć nowego okna: " + e.getMessage());
+            showError("Błąd", "Nie udało się otworzyć widoku dodawania pola: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @FXML
-    public void usunPole(MouseEvent mouseEvent) {
+    private void handleDeleteField(ActionEvent event) {
         Field selectedField = fieldTable.getSelectionModel().getSelectedItem();
-
         if (selectedField != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Potwierdzenie usunięcia");
-            alert.setHeaderText("Czy na pewno chcesz usunąć to pole?");
-            alert.setContentText("Nazwa: " + selectedField.getName() + "\nLokalizacja: " + selectedField.getLocalisation());
+            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmAlert.setTitle("Potwierdź usunięcie");
+            confirmAlert.setHeaderText("Czy na pewno chcesz usunąć pole: " + selectedField.getName() + "?");
+            confirmAlert.setContentText("Usunięcie pola spowoduje również usunięcie wszystkich powiązanych upraw i zabiegów.");
 
-            Optional<ButtonType> result = alert.showAndWait();
+            Optional<ButtonType> result = confirmAlert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                CrudOperation crudOperation = new CrudOperation();
                 try {
+                    CrudOperation crudOperation = new CrudOperation();
                     crudOperation.deleteField(selectedField.getId());
-                    loadTableData(); // Odśwież dane w tabeli po usunięciu
+                    loadFields(); // Odśwież listę pól po usunięciu
                     Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
                     successAlert.setTitle("Sukces");
                     successAlert.setHeaderText(null);
@@ -117,8 +111,10 @@ public class MainController {
                     successAlert.showAndWait();
                 } catch (SQLException e) {
                     showError("Błąd usuwania", "Wystąpił błąd podczas usuwania pola: " + e.getMessage());
+                    e.printStackTrace();
                 } catch (IllegalStateException e) {
                     showError("Błąd autoryzacji", e.getMessage());
+                    e.printStackTrace();
                 }
             }
         } else {
@@ -126,7 +122,39 @@ public class MainController {
         }
     }
 
+    @FXML
+    private void handleShowUprawy(ActionEvent event) {
+        Field selectedField = fieldTable.getSelectionModel().getSelectedItem();
+        if (selectedField != null) {
+            try {
+                // Poprawiona ścieżka do FXML (z uprawaMenu.fxml na uprawa.fxml)
+                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/uprawa.fxml"));
+                Parent root = loader.load();
+                UprawaController uprawaController = loader.getController();
 
+                // ZMIANA TUTAJ: Zmieniono 'setFieldDetails' na 'setFieldData'
+                uprawaController.setFieldData(selectedField.getId(), selectedField.getName(),
+                        selectedField.getArea(), selectedField.getLocalisation());
+
+                Scene uprawaScene = new Scene(root);
+                Stage noweOkno = new Stage();
+                noweOkno.setScene(uprawaScene);
+                noweOkno.setTitle("Uprawy dla pola: " + selectedField.getName());
+
+                noweOkno.setOnHidden(event1 -> {
+                    loadFields();
+                });
+
+                noweOkno.show();
+
+            } catch (IOException e) {
+                showError("Błąd", "Nie udało się otworzyć widoku upraw: " + e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            showError("Błąd", "Proszę wybrać pole, aby wyświetlić jego uprawy.");
+        }
+    }
 
     private void showError(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -135,18 +163,17 @@ public class MainController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
     @FXML
     public void wyloguj_sie(MouseEvent mouseEvent) throws IOException {
-
         SessionManager.logout();
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        // Użycie pełnej ścieżki do zasobu FXML z HelloApplication.class
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/login.fxml"));
         Parent root = loader.load();
         Scene nowaScena = new Scene(root);
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         stage.setScene(nowaScena);
         stage.setTitle("Logowanie");
         stage.show();
-
-
     }
 }

@@ -3,9 +3,9 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>759</IntrospectionStateNumber>
+      <IntrospectionStateNumber>821</IntrospectionStateNumber>
       <ServerVersion>17.4</ServerVersion>
-      <StartupTime>1747402849</StartupTime>
+      <StartupTime>1749113790</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -801,7 +801,7 @@ false Zulu
 14751||10|C|G
 14751||-9223372036854775808|U|G
 14751||10|U|G</Grants>
-      <IntrospectionStateNumber>759</IntrospectionStateNumber>
+      <IntrospectionStateNumber>821</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4223,8 +4223,8 @@ false Zulu
     <schema id="264" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>759</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2025-05-19.19:57:42</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>821</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2025-06-08.01:57:03</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4233,7 +4233,7 @@ false Zulu
       <ObjectId>16396</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
@@ -4241,7 +4241,7 @@ false Zulu
       <ObjectId>16410</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
@@ -4249,7 +4249,7 @@ false Zulu
       <ObjectId>16387</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
@@ -4257,31 +4257,31 @@ false Zulu
       <ObjectId>16424</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <StoredType>integer|0s</StoredType>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="269" parent="264" name="pola">
       <ObjectId>16397</ObjectId>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="270" parent="264" name="uprawy">
       <ObjectId>16411</ObjectId>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="271" parent="264" name="uzytkownicy">
       <ObjectId>16388</ObjectId>
-      <StateNumber>751</StateNumber>
+      <StateNumber>820</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="272" parent="264" name="zabiegi">
       <ObjectId>16425</ObjectId>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4310,9 +4310,9 @@ false Zulu
     </column>
     <column id="276" parent="269" name="powierzchnia_ha">
       <Position>4</Position>
-      <StateNumber>745</StateNumber>
-      <StoredType>real|0s</StoredType>
-      <TypeId>700</TypeId>
+      <StateNumber>789</StateNumber>
+      <StoredType>double precision|0s</StoredType>
+      <TypeId>701</TypeId>
     </column>
     <column id="277" parent="269" name="lokalizacja">
       <Position>5</Position>
@@ -4333,7 +4333,7 @@ false Zulu
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16403</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
@@ -4381,9 +4381,9 @@ false Zulu
     </column>
     <column id="286" parent="270" name="zysk">
       <Position>6</Position>
-      <StateNumber>745</StateNumber>
-      <StoredType>real|0s</StoredType>
-      <TypeId>700</TypeId>
+      <StateNumber>794</StateNumber>
+      <StoredType>double precision|0s</StoredType>
+      <TypeId>701</TypeId>
     </column>
     <foreign-key id="287" parent="270" name="uprawy_pole_id_fkey">
       <ColNames>pole_id</ColNames>
@@ -4398,7 +4398,7 @@ false Zulu
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16417</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
@@ -4437,7 +4437,7 @@ false Zulu
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16394</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
@@ -4491,11 +4491,23 @@ false Zulu
     </column>
     <column id="301" parent="272" name="koszt">
       <Position>7</Position>
-      <StateNumber>745</StateNumber>
+      <StateNumber>790</StateNumber>
+      <StoredType>double precision|0s</StoredType>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="302" parent="272" name="rodzaj_zabiegu">
+      <Position>8</Position>
+      <StateNumber>797</StateNumber>
+      <StoredType>varchar(50)|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="303" parent="272" name="zarobek">
+      <Position>9</Position>
+      <StateNumber>807</StateNumber>
       <StoredType>real|0s</StoredType>
       <TypeId>700</TypeId>
     </column>
-    <foreign-key id="302" parent="272" name="zabiegi_uprawa_id_fkey">
+    <foreign-key id="304" parent="272" name="zabiegi_uprawa_id_fkey">
       <ColNames>uprawa_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16433</ObjectId>
@@ -4503,16 +4515,16 @@ false Zulu
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>16411</RefTableId>
     </foreign-key>
-    <index id="303" parent="272" name="zabiegi_pkey">
+    <index id="305" parent="272" name="zabiegi_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16431</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>745</StateNumber>
+      <StateNumber>820</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="304" parent="272" name="zabiegi_pkey">
+    <key id="306" parent="272" name="zabiegi_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>16432</ObjectId>
       <Primary>1</Primary>

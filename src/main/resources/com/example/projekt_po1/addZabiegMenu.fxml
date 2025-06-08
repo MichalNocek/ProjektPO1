@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.AddZabiegMenuController">
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="100.0" layoutY="20.0" prefHeight="510.0" prefWidth="400.0" spacing="20">
+            <padding>
+                <Insets bottom="20" left="40" right="40" top="20" />
+            </padding>
+
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="➕ Dodaj Zabieg" />
+
+            <GridPane hgap="10" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" minWidth="120" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                </columnConstraints>
+
+                <rowConstraints>
+                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" />
+                </rowConstraints>
+
+                <children>
+                    <Label text="Nazwa Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="nazwaZabieguField" promptText="Wprowadź nazwę zabiegu" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label text="Typ Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="typZabieguField" promptText="Np. Siew, Oprysk, Orka" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Label text="Data Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <DatePicker fx:id="dataZabieguPicker" promptText="Wybierz datę zabiegu" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Label text="Dawka (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <TextField fx:id="dawkaField" promptText="Np. 200kg/ha, 3l/ha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <Label text="Koszt (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="kosztField" promptText="Np. 150.75" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                    <Label text="Rodzaj Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <ComboBox fx:id="rodzajZabieguComboBox" promptText="Wybierz rodzaj" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                    <Label text="Zarobek (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <TextField fx:id="zarobekField" promptText="Wprowadź zarobek ze zbioru (tylko dla 'ZBIÓR')" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                </children>
+            </GridPane>
+
+            <Text fx:id="errorText" fill="RED" textAlignment="CENTER" wrappingWidth="300.0" />
+
+            <Button onAction="#handleAddZabieg" style="-fx-font-size: 14px; -fx-padding: 8px 20px;" text="✅ Dodaj Zabieg" />
+        </VBox>
+    </children>
+</AnchorPane>
