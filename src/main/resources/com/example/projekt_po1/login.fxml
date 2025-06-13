@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -7,32 +8,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.effect.DropShadow?>
 
-<VBox prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.LoginController">
+<VBox prefHeight="450.0" prefWidth="500.0" alignment="CENTER" spacing="20" style="-fx-background-color: #f0f8f0; -fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.LoginController">
     <children>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
+        <AnchorPane VBox.vgrow="ALWAYS" style="-fx-background-color: white; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow color="#00000033" offsetX="3" offsetY="3" radius="5"/>
+            </effect>
             <children>
-                <Text fill="#4fe058" layoutX="8.0" layoutY="43.0" stroke="#a41a1a" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.1" text="System zarządzania gospodarstwem" textAlignment="CENTER" wrappingWidth="553.13671875">
+                <Text fill="#2e8b57" layoutX="25.0" layoutY="60.0" strokeWidth="0.0" text="System zarządzania gospodarstwem" textAlignment="CENTER" wrappingWidth="450.0">
                     <font>
-                        <Font name="System Bold" size="27.0" />
+                        <Font name="System Bold" size="24.0" />
                     </font>
                 </Text>
-                <Text layoutX="227.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER" wrappingWidth="107.443359375">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Text>
-                <TextField fx:id="loginField" layoutX="206.0" layoutY="105.0" promptText="Login" />
-                <Text layoutX="209.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło" textAlignment="CENTER" wrappingWidth="142.052734375">
+                <Text layoutX="50.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login:" textAlignment="RIGHT" wrappingWidth="100.0">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Text>
-                <PasswordField fx:id="passwordField" layoutX="205.0" layoutY="165.0" promptText="Hasło" />
-                <Button layoutX="151.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#zaloguj_sie" prefHeight="53.0" prefWidth="107.0" text="Zaloguj" />
-                <Button layoutX="285.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#zarejestruj_sie" prefHeight="53.0" prefWidth="107.0" text="Zarejestruj się" />
-                <Text fx:id="errorText" fill="RED" layoutX="209.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="142.052734375" />
+                <TextField fx:id="loginField" layoutX="170.0" layoutY="100.0" prefHeight="30.0" prefWidth="280.0" promptText="Wprowadź login" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5;"/>
+                <Text layoutX="50.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło:" textAlignment="RIGHT" wrappingWidth="100.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Text>
+                <PasswordField fx:id="passwordField" layoutX="170.0" layoutY="160.0" prefHeight="30.0" prefWidth="280.0" promptText="Wprowadź hasło" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5;"/>
+                <Text fx:id="errorText" fill="RED" layoutX="50.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="400.0" />
+                <Button layoutX="170.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#zaloguj_sie" prefHeight="40.0" prefWidth="130.0" text="Zaloguj" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button layoutX="320.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#zarejestruj_sie" prefHeight="40.0" prefWidth="130.0" text="Zarejestruj się" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
             </children>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
         </AnchorPane>
     </children>
 </VBox>

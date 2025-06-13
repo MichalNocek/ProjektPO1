@@ -1,10 +1,9 @@
 package com.example.projekt_po1.sceneFunction;
 
-
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert; // DODAJ TEN IMPORT
-import javafx.stage.Stage; // DODAJ TEN IMPORT
+import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 import jdbc.CrudOperation;
 
 import java.sql.SQLException;
@@ -16,8 +15,6 @@ public class AddFieldMenuController {
     private  javafx.scene.control.TextField areaField;
     @FXML
     private javafx.scene.control.TextField locationField;
-
-
 
     @FXML
     public void handleAddField(ActionEvent event) {
@@ -36,7 +33,6 @@ public class AddFieldMenuController {
             crudOperation.addfield(name, area, localisation);
             showAlert(Alert.AlertType.INFORMATION, "Sukces", "Pole zostało pomyślnie dodane.");
 
-            // Zamknij okno po dodaniu pola
             Stage stage = (Stage) fieldNameField.getScene().getWindow();
             stage.close();
 
@@ -48,7 +44,6 @@ public class AddFieldMenuController {
             showAlert(Alert.AlertType.ERROR, "Błąd sesji", e.getMessage());
         }
     }
-    //okno do błędów
     private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);

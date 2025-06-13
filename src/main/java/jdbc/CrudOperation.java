@@ -3,20 +3,21 @@ package jdbc;
 import com.example.projekt_po1.objects.Field;
 import com.example.projekt_po1.objects.SessionManager;
 import com.example.projekt_po1.objects.Uprawa;
-import com.example.projekt_po1.objects.Zabieg; // DODAJ TEN IMPORT
+import com.example.projekt_po1.objects.Zabieg;
+import com.example.projekt_po1.objects.User; // Dodano import User
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types; // DODAJ TEN IMPORT
+import java.sql.Statement; // Dodano import Statement
+import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CrudOperation {
 
-    // Rejestracja użytkownika
     public int registerUser(String login, String password) throws SQLException {
         String sqlCheck = "SELECT id FROM uzytkownicy WHERE login = ?";
         String add = "INSERT INTO uzytkownicy (login, password) VALUES (?, ?)";
@@ -27,36 +28,41 @@ public class CrudOperation {
                 pstmtCheck.setString(1, login);
                 ResultSet rs = pstmtCheck.executeQuery();
                 if (rs.next()) {
-                    return 0; // Użytkownik już istnieje
+                    return 0;
                 }
             }
 
-            try (PreparedStatement pstmtAdd = conn.prepareStatement(add)) {
+            try (PreparedStatement pstmtAdd = conn.prepareStatement(add, Statement.RETURN_GENERATED_KEYS)) {
                 pstmtAdd.setString(1, login);
                 pstmtAdd.setString(2, password);
                 pstmtAdd.executeUpdate();
-                return 1; // Użytkownik zarejestrowany
+                ResultSet rs = pstmtAdd.getGeneratedKeys();
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
             }
+            return 0;
         }
     }
 
-    // Logowanie do aplikacji
-    public int loginUser(String login, String haslo) throws SQLException {
-        String sql = "SELECT id FROM uzytkownicy WHERE login = ? AND password = ?";
+    public User loginUser(String login, String password) throws SQLException {
+        String sql = "SELECT id, login, password FROM uzytkownicy WHERE login = ? AND password = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, login);
-            pstmt.setString(2, haslo);
+            pstmt.setString(2, password);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return rs.getInt("id"); // Zwróć ID zalogowanego użytkownika
+                    int id = rs.getInt("id");
+                    String userLogin = rs.getString("login");
+                    String userPassword = rs.getString("password");
+                    return new User(id, userLogin, userPassword);
                 }
-                return 0; // Nie znaleziono użytkownika
             }
         }
+        return null;
     }
 
-    // Dodanie pola
     public void addfield(String name, double area, String localisation) throws SQLException {
         int userId = SessionManager.getLoggedInUserId();
         if (userId == 0) {
@@ -75,7 +81,6 @@ public class CrudOperation {
         }
     }
 
-    // Pobranie pól dla zalogowanego użytkownika
     public List<Field> getFields() throws SQLException {
         List<Field> fieldList = new ArrayList<>();
         int userId = SessionManager.getLoggedInUserId();
@@ -102,9 +107,8 @@ public class CrudOperation {
         return fieldList;
     }
 
-    // Metoda do usuwania pola
     public void deleteField(int fieldId) throws SQLException {
-        int userId = SessionManager.getLoggedInUserId(); // Upewnij się, że pole należy do zalogowanego użytkownika
+        int userId = SessionManager.getLoggedInUserId();
         if (userId == 0) {
             throw new IllegalStateException("Użytkownik nie jest zalogowany, nie można usunąć pola.");
         }
@@ -112,23 +116,20 @@ public class CrudOperation {
         Connection conn = null;
         try {
             conn = DBConnection.getConnection();
-            conn.setAutoCommit(false); // Rozpoczynamy transakcję
+            conn.setAutoCommit(false);
 
-            // 1. Usuń wszystkie zabiegi powiązane z uprawami na tym polu
             String sqlDeleteZabiegi = "DELETE FROM zabiegi WHERE uprawa_id IN (SELECT id FROM uprawy WHERE pole_id = ?)";
             try (PreparedStatement pstmtDeleteZabiegi = conn.prepareStatement(sqlDeleteZabiegi)) {
                 pstmtDeleteZabiegi.setInt(1, fieldId);
                 pstmtDeleteZabiegi.executeUpdate();
             }
 
-            // 2. Usuń wszystkie uprawy powiązane z tym polem
             String sqlDeleteUprawy = "DELETE FROM uprawy WHERE pole_id = ?";
             try (PreparedStatement pstmtDeleteUprawy = conn.prepareStatement(sqlDeleteUprawy)) {
                 pstmtDeleteUprawy.setInt(1, fieldId);
                 pstmtDeleteUprawy.executeUpdate();
             }
 
-            // 3. Usuń samo pole
             String sqlDeleteField = "DELETE FROM pola WHERE id = ? AND uzytkownik_id = ?";
             try (PreparedStatement pstmtDeleteField = conn.prepareStatement(sqlDeleteField)) {
                 pstmtDeleteField.setInt(1, fieldId);
@@ -136,21 +137,20 @@ public class CrudOperation {
                 pstmtDeleteField.executeUpdate();
             }
 
-            conn.commit(); // Zatwierdzamy transakcję, jeśli wszystko poszło dobrze
+            conn.commit();
         } catch (SQLException e) {
             if (conn != null) {
-                conn.rollback(); // Wycofujemy transakcję w razie błędu
+                conn.rollback();
             }
-            throw e; // Przekazujemy wyjątek dalej
+            throw e;
         } finally {
             if (conn != null) {
-                conn.setAutoCommit(true); // Przywracamy domyślny tryb auto-commit
-                conn.close(); // Zamykamy połączenie
+                conn.setAutoCommit(true);
+                conn.close();
             }
         }
     }
 
-    // Dodawanie nowej uprawy z opcjonalnymi datą zbioru i zyskiem
     public void addUprawa(int poleId, String nazwa, LocalDate dataSiewu, LocalDate dataZbioru, Double zysk) throws SQLException {
         String sql = "INSERT INTO uprawy (pole_id, nazwa, data_siewu, data_zbioru, zysk) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
@@ -165,11 +165,10 @@ public class CrudOperation {
                 pstmt.setNull(4, java.sql.Types.DATE);
             }
 
-            // Używamy Types.REAL, ponieważ kolumna zysk jest float4 w PostgreSQL
             if (zysk != null) {
                 pstmt.setDouble(5, zysk);
             } else {
-                pstmt.setNull(5, Types.REAL); // Typ danych REAL w PostgreSQL
+                pstmt.setNull(5, Types.REAL);
             }
 
             pstmt.executeUpdate();
@@ -177,7 +176,6 @@ public class CrudOperation {
         }
     }
 
-    // Pobieranie upraw dla konkretnego pola
     public List<Uprawa> getUprawyForField(int poleId) throws SQLException {
         List<Uprawa> uprawaList = new ArrayList<>();
         String sql = "SELECT id, nazwa, data_siewu, data_zbioru, zysk FROM uprawy WHERE pole_id = ?";
@@ -193,12 +191,11 @@ public class CrudOperation {
                     uprawa.setDataSiewu(rs.getDate("data_siewu") != null ? rs.getDate("data_siewu").toLocalDate() : null);
                     uprawa.setDataZbioru(rs.getDate("data_zbioru") != null ? rs.getDate("data_zbioru").toLocalDate() : null);
 
-                    // PRAWIDŁOWA ZMIANA TUTAJ DLA "ZYSK": Odczytujemy jako float, następnie konwertujemy na Double
                     float retrievedZyskFloat = rs.getFloat("zysk");
                     if (rs.wasNull()) {
-                        uprawa.setZysk(0.0); // Ustaw 0.0 jeśli zysk jest NULL w bazie
+                        uprawa.setZysk(0.0);
                     } else {
-                        uprawa.setZysk((double) retrievedZyskFloat); // Konwertuj float na double
+                        uprawa.setZysk((double) retrievedZyskFloat);
                     }
                     uprawaList.add(uprawa);
                 }
@@ -207,82 +204,71 @@ public class CrudOperation {
         return uprawaList;
     }
 
-    // Usuwanie uprawy (zakłada ON DELETE CASCADE na zabiegach, jeśli nie to najpierw usuń zabiegi)
     public void deleteUprawa(int uprawaId) throws SQLException {
         Connection conn = null;
         try {
             conn = DBConnection.getConnection();
-            conn.setAutoCommit(false); // Rozpoczynamy transakcję
+            conn.setAutoCommit(false);
 
-            // Najpierw usuwamy wszystkie zabiegi powiązane z tą uprawą
             String sqlDeleteZabiegi = "DELETE FROM zabiegi WHERE uprawa_id = ?";
             try (PreparedStatement pstmtDeleteZabiegi = conn.prepareStatement(sqlDeleteZabiegi)) {
                 pstmtDeleteZabiegi.setInt(1, uprawaId);
                 pstmtDeleteZabiegi.executeUpdate();
             }
 
-            // Następnie usuwamy samą uprawę
             String sqlDeleteUprawa = "DELETE FROM uprawy WHERE id = ?";
             try (PreparedStatement pstmtDeleteUprawa = conn.prepareStatement(sqlDeleteUprawa)) {
                 pstmtDeleteUprawa.setInt(1, uprawaId);
                 pstmtDeleteUprawa.executeUpdate();
             }
-            conn.commit(); // Zatwierdzamy transakcję
+            conn.commit();
         } catch (SQLException e) {
             if (conn != null) {
-                conn.rollback(); // Wycofujemy transakcję w razie błędu
+                conn.rollback();
             }
-            throw e; // Przekazujemy wyjątek dalej
+            throw e;
         } finally {
             if (conn != null) {
-                conn.setAutoCommit(true); // Przywracamy domyślny tryb auto-commit
-                conn.close(); // Zamykamy połączenie
+                conn.setAutoCommit(true);
+                conn.close();
             }
         }
     }
 
-    // NOWE METODY DLA ZABIEGÓW (dostosowane do Twojego schematu DB)
-
-    // Dodawanie nowego zabiegu
     public void addZabieg(int uprawaId, String nazwa, String typ, LocalDate data, String dawka, Double koszt, String rodzajZabiegu, Double zarobek) throws SQLException {
         String sql = "INSERT INTO zabiegi (uprawa_id, nazwa, typ, data, dawka, koszt, rodzaj_zabiegu, zarobek) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, uprawaId);
 
-            // Nazwa (może być null w DB)
             if (nazwa != null && !nazwa.isEmpty()) {
                 pstmt.setString(2, nazwa);
             } else {
                 pstmt.setNull(2, Types.VARCHAR);
             }
 
-            // Typ (może być null w DB)
             if (typ != null && !typ.isEmpty()) {
                 pstmt.setString(3, typ);
             } else {
                 pstmt.setNull(3, Types.VARCHAR);
             }
 
-            // Data (może być null w DB)
             if (data != null) {
                 pstmt.setDate(4, java.sql.Date.valueOf(data));
             } else {
                 pstmt.setNull(4, Types.DATE);
             }
 
-            // Dawka (może być null w DB)
             if (dawka != null && !dawka.isEmpty()) {
                 pstmt.setString(5, dawka);
             } else {
                 pstmt.setNull(5, Types.VARCHAR);
             }
 
-            // Koszt (może być null w DB, używamy Double)
             if (koszt != null) {
                 pstmt.setDouble(6, koszt);
             } else {
-                pstmt.setNull(6, Types.REAL); // Typ danych REAL w PostgreSQL
+                pstmt.setNull(6, Types.REAL);
             }
             if (rodzajZabiegu != null && !rodzajZabiegu.isEmpty()) {
                 pstmt.setString(7, rodzajZabiegu);
@@ -301,11 +287,10 @@ public class CrudOperation {
             if ("ZBIÓR".equalsIgnoreCase(rodzajZabiegu) && data != null) {
                 updateUprawaDataZbioru(uprawaId, data);
             }
-            recalculateUprawaProfit(uprawaId); // Dodano wywołanie do przeliczenia zysku uprawy
+            recalculateUprawaProfit(uprawaId);
         }
     }
 
-    // Pobieranie zabiegów dla konkretnej uprawy
     public List<Zabieg> getZabiegiForUprawa(int uprawaId) throws SQLException {
         List<Zabieg> zabiegList = new ArrayList<>();
         String sql = "SELECT id, nazwa, typ, data, dawka, koszt, rodzaj_zabiegu, zarobek FROM zabiegi WHERE uprawa_id = ?";
@@ -314,12 +299,11 @@ public class CrudOperation {
             pstmt.setInt(1, uprawaId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
-                    // PRAWIDŁOWA ZMIANA TUTAJ DLA "KOSZT": Odczytujemy jako float, następnie konwertujemy na Double
                     float retrievedKosztFloat = rs.getFloat("koszt");
                     Double finalKoszt = rs.wasNull() ? 0.0 : (double) retrievedKosztFloat;
 
                     double retrievedZarobek = rs.getDouble("zarobek");
-                    boolean zarobekWasNull = rs.wasNull(); // Sprawdź, czy zarobek był NULL w bazie
+                    boolean zarobekWasNull = rs.wasNull();
 
                     Zabieg zabieg = new Zabieg(
                             rs.getInt("id"),
@@ -327,9 +311,9 @@ public class CrudOperation {
                             rs.getString("typ"),
                             rs.getDate("data") != null ? rs.getDate("data").toLocalDate() : null,
                             rs.getString("dawka"),
-                            finalKoszt, // Użyj poprawionej wartości
+                            finalKoszt,
                             rs.getString("rodzaj_zabiegu"),
-                            zarobekWasNull ? 0.0 : retrievedZarobek, // Ustaw 0.0 jeśli zarobek był NULL
+                            zarobekWasNull ? 0.0 : retrievedZarobek,
                             uprawaId
                     );
                     zabiegList.add(zabieg);
@@ -339,18 +323,16 @@ public class CrudOperation {
         return zabiegList;
     }
 
-    // Usuwanie zabiegu
     public void deleteZabieg(int zabiegId, int uprawaId) throws SQLException {
         String sql = "DELETE FROM zabiegi WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, zabiegId);
             pstmt.executeUpdate();
-            recalculateUprawaProfit(uprawaId); // Po usunięciu zabiegu przelicz zysk uprawy
+            recalculateUprawaProfit(uprawaId);
         }
     }
 
-    // Obliczanie całkowitych kosztów dla danej uprawy
     public double getTotalKosztForUprawa(int uprawaId) throws SQLException {
         String sql = "SELECT COALESCE(SUM(koszt), 0.0) AS total_koszt FROM zabiegi WHERE uprawa_id = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -358,7 +340,6 @@ public class CrudOperation {
             pstmt.setInt(1, uprawaId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    // Odczytujemy jako float, następnie konwertujemy na Double
                     float totalKosztFloat = rs.getFloat("total_koszt");
                     return (double) totalKosztFloat;
                 }
@@ -367,7 +348,6 @@ public class CrudOperation {
         return 0.0;
     }
 
-    // Obliczanie całkowitych zarobków dla danej uprawy (tylko zabiegi typu 'ZBIÓR')
     public double getTotalZarobekForUprawa(int uprawaId) throws SQLException {
         String sql = "SELECT COALESCE(SUM(zarobek), 0.0) AS total_zarobek FROM zabiegi WHERE uprawa_id = ? AND UPPER(rodzaj_zabiegu) = 'ZBIÓR'";
         try (Connection conn = DBConnection.getConnection();
@@ -375,7 +355,6 @@ public class CrudOperation {
             pstmt.setInt(1, uprawaId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    // Odczytujemy jako float, następnie konwertujemy na Double
                     float totalZarobekFloat = rs.getFloat("total_zarobek");
                     return (double) totalZarobekFloat;
                 }
@@ -384,7 +363,6 @@ public class CrudOperation {
         return 0.0;
     }
 
-    // Metoda do przeliczania i aktualizowania zysku uprawy
     public void recalculateUprawaProfit(int uprawaId) throws SQLException {
         double totalKoszt = getTotalKosztForUprawa(uprawaId);
         double totalZarobek = getTotalZarobekForUprawa(uprawaId);
@@ -399,7 +377,6 @@ public class CrudOperation {
         }
     }
 
-    // Metoda do aktualizacji daty zbioru dla uprawy
     public void updateUprawaDataZbioru(int uprawaId, LocalDate dataZbioru) throws SQLException {
         String sql = "UPDATE uprawy SET data_zbioru = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();

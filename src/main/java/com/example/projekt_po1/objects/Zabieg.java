@@ -32,12 +32,12 @@ public class Zabieg extends BaseEnity {
         this.uprawaId = uprawaId;
     }
 
-    // Konstruktor do tworzenia nowego zabiegu (bez id)
+
     public Zabieg(String nazwa, String typ, LocalDate data, String dawka, double koszt, String rodzajZabiegu, double zarobek, int uprawaId) {
         this(0, nazwa, typ, data, dawka, koszt, rodzajZabiegu, zarobek, uprawaId);
     }
 
-    // Pusty konstruktor dla FXML PropertyValueFactory
+
     public Zabieg() {
         this.uprawaId = 0;
     }

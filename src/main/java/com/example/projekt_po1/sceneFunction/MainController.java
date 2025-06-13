@@ -73,14 +73,14 @@ public class MainController {
     @FXML
     private void handleAddField(ActionEvent event) {
         try {
-            // Użycie pełnej ścieżki do zasobu FXML z HelloApplication.class
+
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/addFieldMenu.fxml"));
             Parent root = loader.load();
             Scene addFieldScene = new Scene(root);
             Stage newStage = new Stage();
             newStage.setScene(addFieldScene);
             newStage.setTitle("Dodaj Nowe Pole");
-            newStage.showAndWait(); // Czekaj, aż okno dodawania pola zostanie zamknięte
+            newStage.showAndWait();
 
             loadFields();
         } catch (IOException e) {
@@ -127,7 +127,6 @@ public class MainController {
         Field selectedField = fieldTable.getSelectionModel().getSelectedItem();
         if (selectedField != null) {
             try {
-                // Poprawiona ścieżka do FXML (z uprawaMenu.fxml na uprawa.fxml)
                 FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/uprawa.fxml"));
                 Parent root = loader.load();
                 UprawaController uprawaController = loader.getController();
@@ -167,7 +166,6 @@ public class MainController {
     @FXML
     public void wyloguj_sie(MouseEvent mouseEvent) throws IOException {
         SessionManager.logout();
-        // Użycie pełnej ścieżki do zasobu FXML z HelloApplication.class
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/login.fxml"));
         Parent root = loader.load();
         Scene nowaScena = new Scene(root);

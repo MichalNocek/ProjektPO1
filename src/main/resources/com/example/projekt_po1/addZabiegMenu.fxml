@@ -11,60 +11,90 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.AddZabiegMenuController">
+<AnchorPane prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #f0f8f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.AddZabiegMenuController">
     <children>
-        <VBox alignment="TOP_CENTER" layoutX="100.0" layoutY="20.0" prefHeight="510.0" prefWidth="400.0" spacing="20">
+        <VBox alignment="TOP_CENTER" layoutX="100.0" layoutY="50.0" prefHeight="550.0" prefWidth="500.0" spacing="20" style="-fx-background-color: white; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow color="#00000033" offsetX="3" offsetY="3" radius="5"/>
+            </effect>
             <padding>
-                <Insets bottom="20" left="40" right="40" top="20" />
+                <Insets bottom="25" left="50" right="50" top="25" />
             </padding>
 
-            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="➕ Dodaj Zabieg" />
+            <Label text="➕ Dodaj Zabieg" textFill="#2e8b57">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+            </Label>
 
-            <GridPane hgap="10" vgap="15">
+            <GridPane hgap="15" vgap="18">
                 <columnConstraints>
-                    <ColumnConstraints halignment="RIGHT" minWidth="120" />
-                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints halignment="RIGHT" minWidth="150" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="ALWAYS" prefWidth="250.0" />
                 </columnConstraints>
 
                 <rowConstraints>
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
                 </rowConstraints>
 
                 <children>
-                    <Label text="Nazwa Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="nazwaZabieguField" promptText="Wprowadź nazwę zabiegu" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label text="Nazwa Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="nazwaZabieguField" promptText="Wprowadź nazwę zabiegu" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                    <Label text="Typ Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="typZabieguField" promptText="Np. Siew, Oprysk, Orka" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Typ Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="typZabieguField" promptText="Np. Siew, Oprysk, Orka" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                    <Label text="Data Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <DatePicker fx:id="dataZabieguPicker" promptText="Wybierz datę zabiegu" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="Data Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <DatePicker fx:id="dataZabieguPicker" promptText="Wybierz datę zabiegu" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                    <Label text="Dawka (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <TextField fx:id="dawkaField" promptText="Np. 200kg/ha, 3l/ha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="Dawka (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="dawkaField" promptText="Np. 200kg/ha, 3l/ha" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                    <Label text="Koszt (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField fx:id="kosztField" promptText="Np. 150.75" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Label text="Koszt (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="kosztField" promptText="Np. 150.75" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-                    <Label text="Rodzaj Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <ComboBox fx:id="rodzajZabieguComboBox" promptText="Wybierz rodzaj" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <Label text="Rodzaj Zabiegu:" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <ComboBox fx:id="rodzajZabieguComboBox" prefWidth="250.0" promptText="Wybierz rodzaj" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                    <Label text="Zarobek (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                    <TextField fx:id="zarobekField" promptText="Wprowadź zarobek ze zbioru (tylko dla 'ZBIÓR')" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                    <Label text="Zarobek (opcjonalnie):" GridPane.columnIndex="0" GridPane.rowIndex="6">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="zarobekField" promptText="Wprowadź zarobek ze zbioru (tylko dla 'ZBIÓR')" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 </children>
             </GridPane>
 
-            <Text fx:id="errorText" fill="RED" textAlignment="CENTER" wrappingWidth="300.0" />
+            <Text fx:id="errorText" fill="RED" textAlignment="CENTER" wrappingWidth="400.0" />
 
-            <Button onAction="#handleAddZabieg" style="-fx-font-size: 14px; -fx-padding: 8px 20px;" text="✅ Dodaj Zabieg" />
+            <Button onAction="#handleAddZabieg" prefHeight="45.0" prefWidth="200.0" text="✅ Dodaj Zabieg" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);">
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+            </Button>
         </VBox>
     </children>
 </AnchorPane>

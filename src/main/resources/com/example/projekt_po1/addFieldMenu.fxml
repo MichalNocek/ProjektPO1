@@ -9,49 +9,63 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane prefHeight="291.0" prefWidth="0.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.AddFieldMenuController">
-
-
-
-
+<AnchorPane prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #f0f8f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.AddFieldMenuController">
     <children>
-        <VBox alignment="TOP_CENTER" layoutY="20" prefWidth="600" spacing="20">
+        <VBox alignment="TOP_CENTER" layoutX="100.0" layoutY="50.0" prefHeight="350.0" prefWidth="400.0" spacing="25.0" style="-fx-background-color: white; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow color="#00000033" offsetX="3" offsetY="3" radius="5"/>
+            </effect>
             <padding>
-                <Insets bottom="20" left="40" right="40" top="20" />
+                <Insets bottom="25.0" left="40.0" right="40.0" top="25.0" />
             </padding>
 
-            <!-- Nagłówek -->
-            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="➕ Dodaj Pole" />
+            <Label text="➕ Dodaj Pole" textFill="#2e8b57">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="15.0" />
+                </VBox.margin>
+            </Label>
 
-            <!-- Formularz -->
-            <GridPane hgap="10" vgap="15">
+            <GridPane hgap="15" vgap="20">
                 <columnConstraints>
-                    <ColumnConstraints halignment="RIGHT" minWidth="150" />
-                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints halignment="RIGHT" minWidth="150" prefWidth="150.0" />
+                    <ColumnConstraints hgrow="ALWAYS" prefWidth="250.0" />
                 </columnConstraints>
 
                 <rowConstraints>
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
-                    <RowConstraints valignment="CENTER" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
+                    <RowConstraints valignment="CENTER" prefHeight="40.0" />
                 </rowConstraints>
 
                 <children>
-                    <Label text="Nazwa:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="fieldNameField" promptText="Wprowadź nazwę" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label text="Nazwa:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="fieldNameField" promptText="Wprowadź nazwę" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                    <Label text="Powierzchnia (ha):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="areaField" promptText="Np. 10.5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Powierzchnia (ha):" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="areaField" promptText="Np. 10.5" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                    <Label text="Lokalizacja:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField fx:id="locationField" promptText="Np. Poznań" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="Lokalizacja:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <font><Font size="14.0" /></font>
+                    </Label>
+                    <TextField fx:id="locationField" promptText="Np. Poznań" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-padding: 8 10;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 </children>
             </GridPane>
 
-            <!-- Przycisk -->
-            <Button onAction="#handleAddField" style="-fx-font-size: 14px; -fx-padding: 8px 20px;" text="✅ Dodaj pole" />
+            <Button onAction="#handleAddField" prefHeight="45.0" prefWidth="200.0" text="✅ Dodaj pole" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);">
+                <VBox.margin>
+                    <Insets top="15.0" />
+                </VBox.margin>
+            </Button>
         </VBox>
     </children>
 </AnchorPane>

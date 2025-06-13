@@ -12,35 +12,33 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
 
 public class Uprawa extends BaseEnity {
-    // Pola klasy z użyciem JavaFX Properties
+
     private final StringProperty nazwa = new SimpleStringProperty();
     private final ObjectProperty<LocalDate> dataSiewu = new SimpleObjectProperty<>();
     private final ObjectProperty<LocalDate> dataZbioru = new SimpleObjectProperty<>();
-    private final DoubleProperty zysk = new SimpleDoubleProperty(); // Pole dla zysku, może być nullable
-    private final IntegerProperty poleId = new SimpleIntegerProperty(); // Klucz obcy do tabeli 'pola'
+    private final DoubleProperty zysk = new SimpleDoubleProperty();
+    private final IntegerProperty poleId = new SimpleIntegerProperty();
 
-    // Konstruktor do tworzenia obiektów z bazy danych lub z pełnymi danymi
+
     public Uprawa(int id, String nazwa, LocalDate dataSiewu, LocalDate dataZbioru, Double zysk, int poleId) {
         this.id = id; // Odziedziczone z BaseEnity
         this.nazwa.set(nazwa);
         this.dataSiewu.set(dataSiewu);
         this.dataZbioru.set(dataZbioru);
-        // Sprawdzenie, czy zysk jest null, aby uniknąć NullPointerException przy ustawianiu SimpleDoubleProperty
+
         if (zysk != null) {
             this.zysk.set(zysk);
         } else {
-            this.zysk.set(0.0); // Domyślna wartość, jeśli zysk jest null w bazie
+            this.zysk.set(0.0);
         }
         this.poleId.set(poleId);
     }
 
-    // Domyślny konstruktor (często potrzebny dla CrudOperation lub JavaFX PropertyValueFactory)
     public Uprawa() {
-        // Inicjalizacja pól w konstruktorze domyślnym, jeśli to konieczne
-        // this.zysk.set(0.0); // Możesz ustawić domyślną wartość
+
     }
 
-    // --- Gettery i Settery dla właściwości JavaFX ---
+
 
     public String getNazwa() {
         return nazwa.get();
@@ -78,12 +76,12 @@ public class Uprawa extends BaseEnity {
         this.dataZbioru.set(dataZbioru);
     }
 
-    // Getter dla zysku (zwraca prymitywny double)
+
     public double getZysk() {
         return zysk.get();
     }
 
-    // Właściwość dla zysku (zwraca DoubleProperty)
+
     public DoubleProperty zyskProperty() {
         return zysk;
     }

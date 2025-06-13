@@ -1,6 +1,7 @@
 package com.example.projekt_po1.sceneFunction;
 
 import com.example.projekt_po1.HelloApplication;
+import com.example.projekt_po1.objects.Field; // Dodaj ten import
 import com.example.projekt_po1.objects.Uprawa;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,18 +53,11 @@ public class UprawaController {
     private int selectedFieldId;
     private String selectedFieldName;
 
-    // Zmieniona nazwa metody z setFieldDetails na setFieldData, aby była spójna z tym co wcześniej działało
+    // Metoda wywoływana z MainController.java
     public void setFieldData(int fieldId, String fieldName, double fieldArea, String fieldLocalisation) {
         this.selectedFieldId = fieldId;
         this.selectedFieldName = fieldName;
-        fieldDetailsLabel.setText("Szczegóły pola: " + fieldName + " (Pow. " + fieldArea + " ha, " + fieldLocalisation + ")");
-        loadUprawaData();
-    }
-
-    public void setFieldData(int fieldId, String fieldName) {
-        this.selectedFieldId = fieldId;
-        this.selectedFieldName = fieldName;
-        fieldDetailsLabel.setText("Uprawy dla pola: " + fieldName);
+        fieldDetailsLabel.setText("Uprawy dla pola: " + fieldName + " (ID: " + fieldId + ")");
         loadUprawaData();
     }
 
@@ -86,6 +80,7 @@ public class UprawaController {
             }
         });
 
+
         uprawaTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             boolean isSelected = newSelection != null;
             deleteUprawaButton.setDisable(!isSelected);
@@ -100,35 +95,33 @@ public class UprawaController {
             System.err.println("Błąd: ID pola nie zostało ustawione dla UprawaController.");
             return;
         }
-        CrudOperation crudOperation = new CrudOperation();
         try {
+            CrudOperation crudOperation = new CrudOperation();
             List<Uprawa> uprawy = crudOperation.getUprawyForField(selectedFieldId);
             uprawaTable.getItems().setAll(uprawy);
         } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Błąd podczas ładowania upraw", e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Błąd ładowania danych", "Nie udało się załadować upraw: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     @FXML
     private void addUprawa(ActionEvent event) {
+        if (selectedFieldId == 0) {
+            showAlert(Alert.AlertType.ERROR, "Błąd", "Nie wybrano pola. Nie można dodać uprawy.");
+            return;
+        }
         try {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/addUprawaMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("addUprawaMenu.fxml"));
             Parent root = loader.load();
-
             AddUprawaMenuController addUprawaMenuController = loader.getController();
-            addUprawaMenuController.setPoleId(selectedFieldId); // Metoda setPoleId zostanie dodana w AddUprawaMenuController
+            addUprawaMenuController.setPoleId(selectedFieldId);
 
-            Scene nowaScena = new Scene(root);
-            Stage noweOkno = new Stage();
-            noweOkno.setScene(nowaScena);
-            noweOkno.setTitle("Dodaj nową uprawę");
-
-            noweOkno.setOnHidden(event1 -> {
-                loadUprawaData();
-            });
-
-            noweOkno.show();
+            Stage stage = new Stage();
+            stage.setTitle("Dodaj uprawę do pola: " + selectedFieldName);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            loadUprawaData();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Błąd", "Nie udało się otworzyć okna dodawania uprawy: " + e.getMessage());
             e.printStackTrace();
@@ -141,8 +134,8 @@ public class UprawaController {
         if (selectedUprawa != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Potwierdzenie usunięcia");
-            alert.setHeaderText("Czy na pewno chcesz usunąć tę uprawę?");
-            alert.setContentText("Nazwa: " + selectedUprawa.getNazwa() + ". Usunięcie uprawy spowoduje również usunięcie wszystkich powiązanych zabiegów.");
+            alert.setHeaderText("Usuwanie uprawy: " + selectedUprawa.getNazwa());
+            alert.setContentText("Czy na pewno chcesz usunąć tę uprawę oraz wszystkie związane z nią zabiegi?");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -166,16 +159,19 @@ public class UprawaController {
         Uprawa selectedUprawa = uprawaTable.getSelectionModel().getSelectedItem();
         if (selectedUprawa != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/zabiegiMenu.fxml"));
+                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("zabiegiMenu.fxml"));
                 Parent root = loader.load();
+                ZabiegiMenuController zabiegiMenuController = loader.getController();
+                zabiegiMenuController.setUprawa(selectedUprawa);
 
-                ZabiegiMenuController zabiegiController = loader.getController();
-                zabiegiController.setUprawaData(selectedUprawa.getId(), selectedUprawa.getNazwa()); // Metoda setUprawaData zostanie dodana w ZabiegiMenuController
-
-                Scene zabiegiScene = new Scene(root);
                 Stage noweOkno = new Stage();
-                noweOkno.setScene(zabiegiScene);
+                noweOkno.setScene(new Scene(root));
                 noweOkno.setTitle("Zabiegi dla uprawy: " + selectedUprawa.getNazwa());
+
+                noweOkno.setOnHidden(event1 -> {
+                    loadUprawaData();
+                });
+
                 noweOkno.show();
 
             } catch (IOException e) {
@@ -189,18 +185,8 @@ public class UprawaController {
 
     @FXML
     private void goBackToMain(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/mainUser.fxml"));
-            Parent root = loader.load();
-            Scene mainScene = new Scene(root);
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            stage.setScene(mainScene);
-            stage.setTitle("Menu główne");
-            stage.show();
-        } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Błąd przejścia", "Nie udało się wrócić do głównego menu: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.close();
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {

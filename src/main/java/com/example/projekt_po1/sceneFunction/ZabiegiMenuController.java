@@ -2,6 +2,7 @@ package com.example.projekt_po1.sceneFunction;
 
 import com.example.projekt_po1.HelloApplication;
 import com.example.projekt_po1.objects.Zabieg;
+import com.example.projekt_po1.objects.Uprawa;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,11 +42,9 @@ public class ZabiegiMenuController {
     @FXML
     private TableColumn<Zabieg, Double> kosztColumn;
     @FXML
-    private TableColumn<Zabieg, String> rodzajZabieguColumn; // Nowa kolumna
+    private TableColumn<Zabieg, String> rodzajZabieguColumn;
     @FXML
-    private TableColumn<Zabieg, Double> zarobekColumn; // Nowa kolumna
-
-
+    private TableColumn<Zabieg, Double> zarobekColumn;
     @FXML
     private Button addZabiegButton;
     @FXML
@@ -53,14 +52,11 @@ public class ZabiegiMenuController {
     @FXML
     private Button backToUprawyButton;
 
-    private int selectedUprawaId;
-    private String selectedUprawaNazwa;
+    private Uprawa currentUprawa; // Zachowaj obiekt Uprawa
 
-    // Metoda do ustawiania danych uprawy, wywoływana z UprawaController
-    public void setUprawaData(int uprawaId, String uprawaNazwa) {
-        this.selectedUprawaId = uprawaId;
-        this.selectedUprawaNazwa = uprawaNazwa;
-        uprawaDetailsLabel.setText("Zabiegi dla uprawy: " + uprawaNazwa);
+    public void setUprawa(Uprawa uprawa) {
+        this.currentUprawa = uprawa;
+        uprawaDetailsLabel.setText("Zabiegi dla uprawy: " + uprawa.getNazwa() + " (ID: " + uprawa.getId() + ")");
         loadZabiegiData();
     }
 
@@ -71,34 +67,33 @@ public class ZabiegiMenuController {
         dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
         dawkaColumn.setCellValueFactory(new PropertyValueFactory<>("dawka"));
         kosztColumn.setCellValueFactory(new PropertyValueFactory<>("koszt"));
-        rodzajZabieguColumn.setCellValueFactory(new PropertyValueFactory<>("rodzajZabiegu")); // Ustawienie PropertyValueFactory
-        zarobekColumn.setCellValueFactory(new PropertyValueFactory<>("zarobek")); // Ustawienie PropertyValueFactory
+        rodzajZabieguColumn.setCellValueFactory(new PropertyValueFactory<>("rodzajZabiegu"));
+        zarobekColumn.setCellValueFactory(new PropertyValueFactory<>("zarobek"));
 
-        // Formatowanie kolumny koszt do 2 miejsc po przecinku
-        kosztColumn.setCellFactory(column -> new TableCell<Zabieg, Double>() {
+        kosztColumn.setCellFactory(tc -> new TableCell<Zabieg, Double>() {
             @Override
-            protected void updateItem(Double item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
+            protected void updateItem(Double koszt, boolean empty) {
+                super.updateItem(koszt, empty);
+                if (empty || koszt == null) {
                     setText(null);
                 } else {
-                    setText(String.format("%.2f", item));
+                    setText(String.format("%.2f", koszt));
                 }
             }
         });
 
-        // Formatowanie kolumny zarobek do 2 miejsc po przecinku
-        zarobekColumn.setCellFactory(column -> new TableCell<Zabieg, Double>() {
+        zarobekColumn.setCellFactory(tc -> new TableCell<Zabieg, Double>() {
             @Override
-            protected void updateItem(Double item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
+            protected void updateItem(Double zarobek, boolean empty) {
+                super.updateItem(zarobek, empty);
+                if (empty || zarobek == null) {
                     setText(null);
                 } else {
-                    setText(String.format("%.2f", item));
+                    setText(String.format("%.2f", zarobek));
                 }
             }
         });
+
 
         zabiegiTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             boolean isSelected = newSelection != null;
@@ -108,39 +103,35 @@ public class ZabiegiMenuController {
     }
 
     private void loadZabiegiData() {
-        if (selectedUprawaId == 0) {
-            System.err.println("Błąd: ID uprawy nie zostało ustawione dla ZabiegiMenuController.");
-            return;
-        }
-        CrudOperation crudOperation = new CrudOperation();
-        try {
-            List<Zabieg> zabiegi = crudOperation.getZabiegiForUprawa(selectedUprawaId);
-            zabiegiTable.getItems().setAll(zabiegi);
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Błąd podczas ładowania zabiegów", e.getMessage());
-            e.printStackTrace();
+        if (currentUprawa != null) {
+            try {
+                CrudOperation crudOperation = new CrudOperation();
+                List<Zabieg> zabiegi = crudOperation.getZabiegiForUprawa(currentUprawa.getId());
+                zabiegiTable.getItems().setAll(zabiegi);
+            } catch (SQLException e) {
+                showAlert(Alert.AlertType.ERROR, "Błąd ładowania danych", "Nie udało się załadować zabiegów: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 
     @FXML
     private void addZabieg(ActionEvent event) {
+        if (currentUprawa == null) {
+            showAlert(Alert.AlertType.ERROR, "Błąd", "Nie wybrano uprawy. Nie można dodać zabiegu.");
+            return;
+        }
         try {
-            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("/com/example/projekt_po1/addZabiegMenu.fxml"));
+            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("addZabiegMenu.fxml"));
             Parent root = loader.load();
-
             AddZabiegMenuController addZabiegMenuController = loader.getController();
-            addZabiegMenuController.setUprawaId(selectedUprawaId);
+            addZabiegMenuController.setUprawaId(currentUprawa.getId());
 
-            Scene nowaScena = new Scene(root);
-            Stage noweOkno = new Stage();
-            noweOkno.setScene(nowaScena);
-            noweOkno.setTitle("Dodaj nowy zabieg dla " + selectedUprawaNazwa);
-
-            noweOkno.setOnHidden(event1 -> {
-                loadZabiegiData(); // Odśwież tabelę po zamknięciu okna
-            });
-
-            noweOkno.show();
+            Stage stage = new Stage();
+            stage.setTitle("Dodaj zabieg do uprawy: " + currentUprawa.getNazwa());
+            stage.setScene(new Scene(root));
+            stage.showAndWait(); // Czekaj na zamknięcie okna dodawania zabiegu
+            loadZabiegiData(); // Odśwież dane po zamknięciu okna
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Błąd", "Nie udało się otworzyć okna dodawania zabiegu: " + e.getMessage());
             e.printStackTrace();
@@ -153,15 +144,16 @@ public class ZabiegiMenuController {
         if (selectedZabieg != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Potwierdzenie usunięcia");
-            alert.setHeaderText("Czy na pewno chcesz usunąć ten zabieg?");
-            alert.setContentText("Nazwa: " + selectedZabieg.getNazwa() + ", Typ: " + selectedZabieg.getTyp());
+            alert.setHeaderText("Usuwanie zabiegu: " + selectedZabieg.getNazwa());
+            alert.setContentText("Czy na pewno chcesz usunąć ten zabieg?");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 CrudOperation crudOperation = new CrudOperation();
                 try {
-                    crudOperation.deleteZabieg(selectedZabieg.getId(), selectedUprawaId); // Przekazujemy również uprawaId
-                    loadZabiegiData(); // Odśwież dane
+
+                    crudOperation.deleteZabieg(selectedZabieg.getId(), currentUprawa.getId());
+                    loadZabiegiData();
                     showAlert(Alert.AlertType.INFORMATION, "Sukces", "Zabieg został pomyślnie usunięty.");
                 } catch (SQLException e) {
                     showAlert(Alert.AlertType.ERROR, "Błąd usuwania", "Wystąpił błąd podczas usuwania zabiegu: " + e.getMessage());
@@ -173,13 +165,10 @@ public class ZabiegiMenuController {
         }
     }
 
-
     @FXML
     private void goBackToUprawy(ActionEvent event) {
-        // Zamknij bieżące okno zabiegów
         Stage stage = (Stage) backToUprawyButton.getScene().getWindow();
         stage.close();
-        // Okno UprawyController zostanie odświeżone automatycznie dzięki setOnHidden w UprawaController
     }
 
     private void showAlert(Alert.AlertType type, String title, String content) {

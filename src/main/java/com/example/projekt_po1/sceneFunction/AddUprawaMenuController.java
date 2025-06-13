@@ -21,11 +21,11 @@ public class AddUprawaMenuController {
     @FXML
     private DatePicker dataZbioruPicker;
     @FXML
-    private TextField zyskField; // Zysk może być pusty
+    private TextField zyskField;
 
-    private int poleId; // Dodane pole do przechowywania ID pola
+    private int poleId;
 
-    // Metoda ustawiająca ID pola, wywoływana z UprawaController
+
     public void setPoleId(int poleId) {
         this.poleId = poleId;
     }
@@ -37,19 +37,19 @@ public class AddUprawaMenuController {
         LocalDate dataZbioru = dataZbioruPicker.getValue();
         Double zysk = null; // Domyślnie null, jeśli pole jest puste
 
-        // Walidacja nazwy uprawy
+
         if (nazwa == null || nazwa.trim().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Błąd", "Nazwa uprawy nie może być pusta.");
             return;
         }
 
-        // Walidacja daty siewu
+
         if (dataSiewu == null) {
             showAlert(Alert.AlertType.ERROR, "Błąd", "Data siewu nie może być pusta.");
             return;
         }
 
-        // Próba parsowania zysku
+
         String zyskText = zyskField.getText();
         if (zyskText != null && !zyskText.trim().isEmpty()) {
             try {

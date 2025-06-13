@@ -1,8 +1,8 @@
 package com.example.projekt_po1.sceneFunction;
 
 import com.example.projekt_po1.HelloApplication;
-
 import com.example.projekt_po1.objects.SessionManager;
+import com.example.projekt_po1.objects.User; // Dodano import User
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,10 +37,10 @@ public class LoginController {
             return;
         } else {
             CrudOperation loginCheck = new CrudOperation();
-            int id = loginCheck.loginUser(login, password);
+            User loggedInUser = loginCheck.loginUser(login, password);
 
-            if (id != 0) {
-                SessionManager.setLoggedInUserId(id);
+            if (loggedInUser != null) {
+                SessionManager.setLoggedInUserId(loggedInUser.getId());
 
                 FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("mainUser.fxml"));
                 Parent root = loader.load();
@@ -59,9 +59,6 @@ public class LoginController {
         }
     }
 
-
-
-
     @FXML
     public void zarejestruj_sie(MouseEvent mouseEvent) throws SQLException {
         CrudOperation loginCheck = new CrudOperation();
@@ -71,22 +68,10 @@ public class LoginController {
         System.out.println("Przejście do rejestracji");
         if (id != 0) {
             errorText.setText("Użytkownik zarejestrowany! Teraz możesz się zalogować.");
-            // Po rejestracji nie logujemy automatycznie, użytkownik musi się sam zalogować
-            // Wyczyść pola formularza po udanej rejestracji
             loginField.clear();
             passwordField.clear();
         } else {
-            errorText.setText("Użytkownik o podanym loginie już istnieje lub wystąpił błąd!");
+            errorText.setText("Użytkownik o podanym loginie już istnieje lub wystąpił błąd podczas rejestracji.");
         }
     }
-
-
-
-
-
-
-
-
-
-
 }

@@ -9,39 +9,47 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.UprawaController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f0f8f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projekt_po1.sceneFunction.UprawaController">
     <children>
-        <VBox alignment="TOP_CENTER" layoutX="100.0" layoutY="20.0" prefHeight="460.0" prefWidth="500.0" spacing="15">
+        <VBox alignment="TOP_CENTER" layoutX="50.0" layoutY="30.0" prefHeight="540.0" prefWidth="700.0" spacing="20" style="-fx-background-color: white; -fx-border-radius: 15; -fx-background-radius: 15;">
+            <effect>
+                <DropShadow color="#00000033" offsetX="3" offsetY="3" radius="5"/>
+            </effect>
             <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
+                <Insets bottom="25" left="25" right="25" top="25" />
             </padding>
 
-            <Label fx:id="fieldDetailsLabel" text="Uprawy dla pola: [Nazwa Pola]" style="-fx-font-size: 20px; -fx-font-weight: bold;">
+            <Label fx:id="fieldDetailsLabel" text="Uprawy dla pola: [Nazwa Pola]" textFill="#2e8b57">
                 <font>
-                    <Font size="18.0" />
+                    <Font name="System Bold" size="26.0" />
                 </font>
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
             </Label>
 
-            <TableView fx:id="uprawaTable" prefHeight="250.0" prefWidth="460.0">
+            <TableView fx:id="uprawaTable" prefHeight="350.0" prefWidth="650.0" style="-fx-border-color: #a9a9a9; -fx-border-radius: 5; -fx-background-radius: 5;">
                 <columns>
-                    <TableColumn fx:id="nazwaUprawyColumn" prefWidth="120.0" text="Nazwa Uprawy" />
-                    <TableColumn fx:id="dataSiewuColumn" prefWidth="100.0" text="Data Siewu" />
-                    <TableColumn fx:id="dataZbioruColumn" prefWidth="100.0" text="Data Zbioru" />
-                    <TableColumn fx:id="zyskColumn" prefWidth="100.0" text="Zysk" />
+                    <TableColumn fx:id="nazwaUprawyColumn" prefWidth="180.0" text="Nazwa Uprawy" />
+                    <TableColumn fx:id="dataSiewuColumn" prefWidth="150.0" text="Data Siewu" />
+                    <TableColumn fx:id="dataZbioruColumn" prefWidth="150.0" text="Data Zbioru" />
+                    <TableColumn fx:id="zyskColumn" prefWidth="168.0" text="Zysk" />
                 </columns>
+            </TableView>
+
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="addUprawaButton" mnemonicParsing="false" onAction="#addUprawa" prefHeight="40.0" prefWidth="160.0" text="➕ Dodaj Uprawę" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);" />
+                <Button fx:id="deleteUprawaButton" mnemonicParsing="false" onAction="#deleteUprawa" prefHeight="40.0" prefWidth="160.0" text="🗑️ Usuń Uprawę" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);" />
+                <Button fx:id="showZabiegiButton" mnemonicParsing="false" onAction="#showZabiegi" prefHeight="40.0" prefWidth="160.0" text="🛠️ Pokaż Zabiegi" style="-fx-background-color: #2e8b57; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);" />
+            </HBox>
+
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBackToMain" prefHeight="40.0" prefWidth="180.0" text="↩️ Wróć do Pól" style="-fx-background-color: #607d8b; -fx-text-fill: white; -fx-font-size: 14; -fx-font-weight: bold; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 3);">
                 <VBox.margin>
                     <Insets top="10.0" />
                 </VBox.margin>
-            </TableView>
-
-            <HBox alignment="CENTER" spacing="15">
-                <Button fx:id="addUprawaButton" mnemonicParsing="false" onAction="#addUprawa" style="-fx-font-size: 14px; -fx-padding: 8px 20px;" text="➕ Dodaj Uprawę" />
-                <Button fx:id="deleteUprawaButton" mnemonicParsing="false" onAction="#deleteUprawa" style="-fx-font-size: 14px; -fx-padding: 8px 20px;" text="🗑️ Usuń Uprawę" />
-                <Button fx:id="showZabiegiButton" mnemonicParsing="false" onAction="#showZabiegi" style="-fx-font-size: 14px; -fx-padding: 8px 20px;" text="🛠️ Pokaż Zabiegi" />
-            </HBox>
-
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBackToMain" style="-fx-font-size: 14px; -fx-padding: 8px 20px;" text="↩️ Wróć do Pól" />
+            </Button>
         </VBox>
     </children>
 </AnchorPane>
