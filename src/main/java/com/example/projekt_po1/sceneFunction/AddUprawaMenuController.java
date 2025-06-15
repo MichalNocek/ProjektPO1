@@ -31,11 +31,11 @@ public class AddUprawaMenuController {
     }
 
     @FXML
-    private void addUprawa(ActionEvent event) { // Zmieniono nazwę metody
+    private void addUprawa(ActionEvent event) {
         String nazwa = nazwaUprawyField.getText();
         LocalDate dataSiewu = dataSiewuPicker.getValue();
         LocalDate dataZbioru = dataZbioruPicker.getValue();
-        Double zysk = null; // Domyślnie null, jeśli pole jest puste
+        Double zysk = null;
 
 
         if (nazwa == null || nazwa.trim().isEmpty()) {

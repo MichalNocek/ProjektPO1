@@ -131,7 +131,7 @@ public class MainController {
                 Parent root = loader.load();
                 UprawaController uprawaController = loader.getController();
 
-                // ZMIANA TUTAJ: Zmieniono 'setFieldDetails' na 'setFieldData'
+
                 uprawaController.setFieldData(selectedField.getId(), selectedField.getName(),
                         selectedField.getArea(), selectedField.getLocalisation());
 

@@ -130,8 +130,8 @@ public class ZabiegiMenuController {
             Stage stage = new Stage();
             stage.setTitle("Dodaj zabieg do uprawy: " + currentUprawa.getNazwa());
             stage.setScene(new Scene(root));
-            stage.showAndWait(); // Czekaj na zamknięcie okna dodawania zabiegu
-            loadZabiegiData(); // Odśwież dane po zamknięciu okna
+            stage.showAndWait();
+            loadZabiegiData();
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Błąd", "Nie udało się otworzyć okna dodawania zabiegu: " + e.getMessage());
             e.printStackTrace();
