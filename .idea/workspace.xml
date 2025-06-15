@@ -5,25 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b9a7985-7281-4f15-89b8-bc0edc2954f8" name="Changes" comment="Poprawione ładowanie scen+ usunięte zbędę fragmenty kodu">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/af4dd608-d7de-4f9f-b6f8-3a205ab8c961/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/BaseEnity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/BaseEnity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Uprawa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Uprawa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Zabieg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/objects/Zabieg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddFieldMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddFieldMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddUprawaMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/AddUprawaMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/UprawaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/UprawaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/ZabiegiMenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/projekt_po1/sceneFunction/ZabiegiMenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/jdbc/CrudOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/jdbc/CrudOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addFieldMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addFieldMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addUprawaMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addUprawaMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addZabiegMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/addZabiegMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/mainUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/mainUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/uprawa.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/uprawa.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/zabiegiMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/projekt_po1/zabiegiMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,9 +58,11 @@
   &quot;keyToString&quot;: {
     &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.example.projekt_po1.HelloApplication.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/Michał/IdeaProjects/ProjektPO1/src/main/resources/com/example/projekt_po1&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -83,7 +70,10 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.16796875&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -93,10 +83,36 @@
       <recent name="C:\Users\Michał\IdeaProjects\ProjektPO1" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.com.example.projekt_po1.HelloApplication">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.projekt_po1.sceneFunction.HelloApplication" />
+      <module name="Projekt_PO1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.projekt_po1.sceneFunction.HelloApplication" />
+      <module name="Projekt_PO1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.projekt_po1.sceneFunction.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.example.projekt_po1.HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.projekt_po1.HelloApplication" />
       <module name="Projekt_PO1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.projekt_po1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -112,6 +128,12 @@
       <option name="filePath" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.com.example.projekt_po1.HelloApplication" />
+        <item itemvalue="Application.com.example.projekt_po1.HelloApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -141,7 +163,9 @@
       <workItem from="1748174270606" duration="3027000" />
       <workItem from="1749339608432" duration="10358000" />
       <workItem from="1749688903099" duration="4977000" />
-      <workItem from="1749828098557" duration="2302000" />
+      <workItem from="1749828098557" duration="3035000" />
+      <workItem from="1749842876921" duration="16434000" />
+      <workItem from="1749998514107" duration="2056000" />
     </task>
     <task id="LOCAL-00001" summary="Pierwszy commit">
       <option name="closed" value="true" />
@@ -183,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749382133651</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Poprawione ładowanie scen+ usunięte zbędę fragmenty kodu">
+      <option name="closed" value="true" />
+      <created>1749834636479</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749834636479</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
