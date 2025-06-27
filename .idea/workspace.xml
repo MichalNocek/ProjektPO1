@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b9a7985-7281-4f15-89b8-bc0edc2954f8" name="Changes" comment="Commit z dołączoną bazą danych">
+    <list default="true" id="9b9a7985-7281-4f15-89b8-bc0edc2954f8" name="Changes" comment="Ostateczne szlify">
+      <change afterPath="$PROJECT_DIR$/Dokumentacja/mn134951.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dokumentacja/mn134951.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,6 +78,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Michał\IdeaProjects\ProjektPO1\Dokumentacja" />
       <recent name="C:\Users\Michał\IdeaProjects\ProjektPO1" />
       <recent name="C:\Users\Michał\IdeaProjects\ProjektPO1\src\main\resources\com\example\projekt_po1" />
     </key>
@@ -164,6 +167,9 @@
       <workItem from="1749842876921" duration="16434000" />
       <workItem from="1749998514107" duration="2136000" />
       <workItem from="1750013407675" duration="60000" />
+      <workItem from="1750019226754" duration="235000" />
+      <workItem from="1750936337811" duration="547000" />
+      <workItem from="1750981073920" duration="4247000" />
     </task>
     <task id="LOCAL-00001" summary="Pierwszy commit">
       <option name="closed" value="true" />
@@ -221,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750000963597</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ostateczne szlify">
+      <option name="closed" value="true" />
+      <created>1750019433442</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1750019433442</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +258,7 @@
     <MESSAGE value="prawie finish poprawidć ładowanie scen" />
     <MESSAGE value="Poprawione ładowanie scen+ usunięte zbędę fragmenty kodu" />
     <MESSAGE value="Commit z dołączoną bazą danych" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit z dołączoną bazą danych" />
+    <MESSAGE value="Ostateczne szlify" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ostateczne szlify" />
   </component>
 </project>
